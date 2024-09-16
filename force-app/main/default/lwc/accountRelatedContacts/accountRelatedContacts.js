@@ -1,5 +1,6 @@
 import { LightningElement,wire,api } from 'lwc';
-import  accountContacts  from '@salesforce/apex/AccountRelatedContacts.accountContacts';
+import accountContacts from '@salesforce/apex/AccountRelatedContacts.accountContacts';
+
 export default class accountRelatedContacts extends LightningElement {
     @api recordId;
     contacts;

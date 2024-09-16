@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Current_Location__c</fullName>
+    <description>Enter coordinates</description>
+    <displayLocationInDecimal>true</displayLocationInDecimal>
+    <inlineHelpText>Latitudes and Longitudes needed</inlineHelpText>
+    <label>Current Location</label>
+    <required>false</required>
+    <scale>4</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Location</type>
+</CustomField>

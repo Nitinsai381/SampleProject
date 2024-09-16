@@ -6,7 +6,7 @@ export default class accountRelatedContacts extends LightningElement {
     contacts;
     error;
     notEmpty ;
-    @wire(accountContacts, { accId : '$recordId' })
+    @wire(accountContacts, { accId : '$recordId' }) 
     wiredData({ data, error }) {
         if (data) {
             console.log('recordId--', this.recordId);

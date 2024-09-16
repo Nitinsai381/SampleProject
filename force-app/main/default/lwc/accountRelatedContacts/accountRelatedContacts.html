@@ -1,0 +1,31 @@
+<template>
+    <template if:true={notEmpty}>
+    <lightning-card>
+            <table class="slds-table slds-table_bordered slds-table_striped">
+                <thead>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    
+                </thead>
+                <tbody>
+                    <!-- {contacts} -->
+                    <template for:each={contacts} for:item="contact">
+
+                        <tr key={contact.Id}>
+                             <td>{contact.Name}</td>
+                             <td>{contact.Phone}</td>
+                             <td>{contact.Email}</td>                   
+                        </tr>      
+                    </template>
+                    </tbody>
+                </table>
+            </lightning-card>
+        </template>
+    <template if:false={notEmpty}>
+        <lightning-card>
+            <p>No related contacts to display</p>
+        </lightning-card>
+    </template>
+        
+</template>

@@ -3,36 +3,45 @@
     <lightning-card>
             <table class="slds-table slds-table_bordered slds-table_striped">
                 <thead>
-                    <th>Name</th>
+                    <template for:each={metaDataRecords} for:item="label">
+                        <th key={label.Id}>{label.Column__c}</th>
+                    </template>
+                    <!-- <th>Name</th> 
                     <th>Phone</th>
                     <th>Email</th>
-                    <th>Owner Name</th>
+                    <th>Fax</th>
+                    <th>Owner Name</th>  -->
                     
                 </thead>
                 <tbody>
                     <!-- {contacts} -->
                      <!-- {displayContacts} -->
+                     <!-- Name	Email	Fax	Languages Owner Name	Phone -->
                     <template for:each={displayContacts} for:item="contact">
-                        <tr key={contact.Id}>
-                             <td>
-                                <!-- {contact.Id} -->
-                              <!-- <a href={`https://raagvitech76-dev-ed.develop.lightning.force.com/lightning/r/Contact/{{contact.Id}}/view`}>{contact.Name}</a>   -->
-                              <!-- <a key={contact.Id} href={contact.Name} >{contact.Name}</a>   -->
-                            <a href={contact.url} target="__blank">{contact.Name}</a>   
-                              <!-- <a href="/lightning/r/Contact/{!contact.Id}/view">{contact.Name}</a>/Id/view -->
+                        <!-- <tr key={contact.Id}>
+                        <template for:each={contact.value} for:item="eachRecord">
+                          
+                                <td key = {eachRecord.key}>{eachRecord} </td>
+                            
+                            </template>
+                        </tr> -->
 
-                            </td>
-                             <td>{contact.Phone}</td>
-                             <td>{contact.Email}</td>                   
-                             <td>{contact.Owner.Name}</td>                   
+
+                        <tr key={contact.Id}>
+                            <td><a href={contact.url} target="__blank">{contact.Name}</a></td>
+                            <td>{contact.Email}</td>                   
+                            <td>{contact.Fax}</td>                   
+                            <td>{contact.Languages__c}</td>                   
+                            <td>{contact.Owner.Name}</td>                   
+                            <td>{contact.Phone}</td>
                         </tr>         
                     </template>
                 </tbody>
             </table>
           <div style="display : flex; justify-content : center ; margin-top : 3%">
-              <button disabled={isPreviousDisable} onclick={onPrevious} class="slds-m-right" style="margin-right: 2%;">Previous</button>
+              <button disabled={isPreviousDisable} onclick={onPrevious} class="slds-button slds-button_brand" style="margin-right: 2%;">Previous</button>
               <span> {pageCount} of {totalPages} </span>
-              <button disabled={isNextDisable} onclick={onNext} class="slds-m-left" style="margin-left: 2%;">Next</button>
+              <button disabled={isNextDisable} onclick={onNext} class="slds-button slds-button_brand" style="margin-left: 2%;">Next</button>
 
           </div>
 

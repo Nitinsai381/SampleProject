@@ -1,5 +1,7 @@
 import { LightningElement,wire,api } from 'lwc';
-import accountContacts from '@salesforce/apex/AccountRelatedContacts.accountContacts';
+// import accountContacts from '@salesforce/apex/AccountRelatedContacts.accountContacts';
+import accountContacts from '@salesforce/apex/AccountRelatedContacts.dynamicAccountContacts';
+import contactLabels from '@salesforce/apex/AccountRelatedContacts.contactLabels';
 
 export default class accountRelatedContacts extends LightningElement {
     @api recordId;
@@ -12,7 +14,7 @@ export default class accountRelatedContacts extends LightningElement {
     start = 0;
     pageCount = 1;
     totalPages;
-    
+    metaDataRecords;
     
     
     @wire(accountContacts, { accId : '$recordId' })
@@ -21,6 +23,7 @@ export default class accountRelatedContacts extends LightningElement {
             console.log('recordId--', this.recordId);
             console.log('inside data coming');
             this.contacts = data;
+            console.log('Contacts data ---- ', this.contacts);
             this.generateUrls();
             this.totalPages = Math.ceil(this.contacts.length / this.perSize);
             console.log('Total pages ______ ', this.totalPages);
@@ -40,7 +43,21 @@ export default class accountRelatedContacts extends LightningElement {
             console.log("Error in fetching data..")
         }
     }
-    // totalPages = this.contacts.length;
+
+    // Custom metadata fetching 
+    @wire(contactLabels)
+    wireLabelData({ data, error }) {
+        if (data) {
+            this.metaDataRecords=data;
+            console.log('MetaDataLabels----', this.metaDataRecords);   
+        }
+        else if (error) {
+            console.log('Error in fetching labels for MetaData ---- ',error);
+            
+        }
+      }
+    
+
     updateDisplayContacts() {
         this.displayContacts = this.contactsWithUrls.slice(this.start, this.start + this.perSize);
         console.log("data"+ this.contactsWithUrls);

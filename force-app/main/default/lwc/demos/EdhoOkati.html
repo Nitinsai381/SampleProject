@@ -1,0 +1,76 @@
+<template>
+  <lightning-card title="Contacts">
+    <div class="slds-m-around_medium">
+      <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+        <thead>
+          <tr class="slds-text-title_bold">
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <template for:each={contacts} for:item="contact">
+            <tr key={contact.Id}>
+              <template if:true={contact.isEditing}>
+                <td>
+                  <lightning-input
+                    type="text"
+                    value={contact.Name}
+                    data-id={contact.Id}
+                    data-field="Name"
+                    onchange={handleFieldChange}
+                  ></lightning-input>
+                </td>
+                <td>
+                  <lightning-input
+                    type="email"
+                    value={contact.Email}
+                    data-id={contact.Id}
+                    data-field="Email"
+                    onchange={handleFieldChange}
+                  ></lightning-input>
+                </td>
+                <td>
+                  <lightning-input
+                    type="phone"
+                    value={contact.Phone}
+                    data-id={contact.Id}
+                    data-field="Phone"
+                    onchange={handleFieldChange}
+                  ></lightning-input>
+                </td>
+                <td>
+                  <lightning-button
+                    label="Save"
+                    onclick={handleSave}
+                    data-id={contact.Id}
+                  ></lightning-button>
+                  <lightning-button
+                    label="Cancel"
+                    onclick={handleCancel}
+                    data-id={contact.Id}
+                  ></lightning-button>
+                </td>
+              </template>
+              <template if:false={contact.isEditing}>
+                <td>{contact.Name}</td>
+                <td>{contact.Email}</td>
+                <td>{contact.Phone}</td>
+                <td>
+                  <lightning-button
+                    icon-name="utility:edit"
+                    alternative-text="Edit"
+                    onclick={handleEdit}
+                    data-id={contact.Id}
+                  ></lightning-button>
+                </td>
+              </template>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+    </div>
+  </lightning-card>
+</template>

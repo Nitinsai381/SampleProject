@@ -1,57 +1,107 @@
 <template>
-    <template if:true={notEmpty}>
+  <template if:true={notEmpty}>
     <lightning-card>
-            <table class="slds-table slds-table_bordered slds-table_striped">
-                <thead>
-                    <template for:each={metaDataRecords} for:item="label">
-                        <th key={label.Id}>{label.Column__c}</th>
-                    </template>
-                    <!-- <th>Name</th> 
+      <table class="slds-table slds-table_bordered slds-table_striped">
+        <thead>
+          <template for:each={metaDataRecords} for:item="label">
+            <th key={label.Id}>{label.Column__c}</th>
+          </template>
+          <!-- <th>Name</th> 
                     <th>Phone</th>
                     <th>Email</th>
                     <th>Fax</th>
                     <th>Owner Name</th>  -->
-                    
-                </thead>
-                <tbody>
-                    <!-- {contacts} -->
-                     <!-- {displayContacts} -->
-                     <!-- Name	Email	Fax	Languages Owner Name	Phone -->
-                    <template for:each={displayContacts} for:item="contact">
-                        <!-- <tr key={contact.Id}>
-                        <template for:each={contact.value} for:item="eachRecord">
-                          
-                                <td key = {eachRecord.key}>{eachRecord} </td>
-                            
-                            </template>
-                        </tr> -->
+        </thead>
+        <tbody>
+          <!-- {contacts} -->
+          <!-- {displayContacts} -->
+          <!-- Name	Email	Fax	Languages Owner Name	Phone -->
+          <template for:each={displayContacts} for:item="contact">
+            <tr key={contact.Id}>
+              <template for:each={metaDataRecords} for:item="eachRecord">
+                <td key={eachRecord.Id}>
+                  {contact.getContactValues(contact,eachRecord)}
+                </td>
+              </template>
+            </tr>
+            <!-- </template> -->
 
-
-                        <tr key={contact.Id}>
-                            <td><a href={contact.url} target="__blank">{contact.Name}</a></td>
-                            <td>{contact.Email}</td>                   
-                            <td>{contact.Fax}</td>                   
-                            <td>{contact.Languages__c}</td>                   
-                            <td>{contact.Owner.Name}</td>                   
-                            <td>{contact.Phone}</td>
-                        </tr>         
-                    </template>
-                </tbody>
-            </table>
-          <div style="display : flex; justify-content : center ; margin-top : 3%">
-              <button disabled={isPreviousDisable} onclick={onPrevious} class="slds-button slds-button_brand" style="margin-right: 2%;">Previous</button>
-              <span> {pageCount} of {totalPages} </span>
-              <button disabled={isNextDisable} onclick={onNext} class="slds-button slds-button_brand" style="margin-left: 2%;">Next</button>
-
-          </div>
-
-         
-            </lightning-card>
-        </template>
-    <template if:false={notEmpty}>
-        <lightning-card>
-            <p>No related contacts to display</p>
-        </lightning-card>
-    </template>
-        
+            <!-- <tr key={contact.Id} style="height: fit-content">
+              
+              <td>
+                <a href={contact.url} target="__blank">{contact.Name}</a>
+              </td>
+              <td>{contact.Email}</td>
+              <td>{contact.Owner.Name}</td>
+              <td>
+                <div>
+                  {contact.Phone}<lightning-button-icon
+                    icon-name="utility:edit"
+                    style="position: absolute; right: 0%; margin: 2px"
+                    onclick={onClickEdit}
+                    data-id={contact.Id}
+                    variant="border-filled"
+                    alternative-text="Save"
+                    class="slds-m-left_xx-small"
+                    title="Save"
+                  ></lightning-button-icon>
+                </div>
+              </td> -->
+            <!-- </template> -->
+            <!-- <template if:true={contact.isEditable}>
+                <td>
+                  <lightning-input
+                    type="text"
+                    value={contact.Name}
+                  ></lightning-input>
+                </td>
+                <td>
+                  <lightning-input
+                    type="text"
+                    value={contact.Email}
+                  ></lightning-input>
+                </td>
+                <td>
+                  <lightning-input
+                    type="text"
+                    value={contact.Owner.Name}
+                  ></lightning-input>
+                </td>
+                <td>
+                  <lightning-input
+                    type="text"
+                    value={contact.Phone}
+                  ></lightning-input>
+                </td>
+              </template> -->
+            <!-- </tr> -->
+          </template>
+        </tbody>
+      </table>
+      <div style="display: flex; justify-content: center; margin-top: 3%">
+        <button
+          disabled={isPreviousDisable}
+          onclick={onPrevious}
+          class="slds-button slds-button_brand"
+          style="margin-right: 2%"
+        >
+          Previous
+        </button>
+        <span> {pageCount} of {totalPages} </span>
+        <button
+          disabled={isNextDisable}
+          onclick={onNext}
+          class="slds-button slds-button_brand"
+          style="margin-left: 2%"
+        >
+          Next
+        </button>
+      </div>
+    </lightning-card>
+  </template>
+  <template if:false={notEmpty}>
+    <lightning-card>
+      <p>No related contacts to display</p>
+    </lightning-card>
+  </template>
 </template>

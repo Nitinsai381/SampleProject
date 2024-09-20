@@ -22,9 +22,29 @@ export default class accountRelatedContacts extends LightningElement {
         if (data) {
             console.log('recordId--', this.recordId);
             console.log('inside data coming');
+            /**
+             * [
+             *  {colName : 'value}.,
+             * 
+             * 
+             * contacts : [records];
+             * ]
+             * [
+             *  {'Name' : 'value', 'Email' : value}
+             *  {'Name' : 'value', 'Email' : value}
+             *  {'Name' : 'value', 'Email' : value}
+             *  {'Name' : 'value', 'Email' : value}
+             *  {'Name' : 'value', 'Email' : value}
+             *  {'Name' : 'value', 'Email' : value}
+             * ]
+             * [
+             *  {colname : new map (name => value)}
+             * ]
+             */
             this.contacts = data;
             console.log('Contacts data ---- ', this.contacts);
             this.generateUrls();
+            // this.makeEditable();
             this.totalPages = Math.ceil(this.contacts.length / this.perSize);
             console.log('Total pages ______ ', this.totalPages);
             // this.notEmpty = this.contacts.length === 0 ? false : true;
@@ -88,11 +108,49 @@ export default class accountRelatedContacts extends LightningElement {
     //         this.contacts[i].url = "https://raagvitech76-dev-ed.develop.lightning.force.com/lightning/r/Contact/" + this.contacts[i].Id + "/view";
     //     }
     // }
+    get computedContacts() {
+        return this.displayContacts.map(contact => {
+            const contactValues = {};
+            this.metaDataRecords.forEach(record => {
+                contactValues[record.Column_Api_Name__c] = contact[record.Column_Api_Name__c];
+            });
+            return {
+                ...contact,
+                contactValues
+            };
+        });
+    }
+    getContactValue(contact, columnName) {
+        return contact[columnName];
+    }
     generateUrls() {
         this.contactsWithUrls = this.contacts.map(contact => ({
             ...contact,
-            url: `https://raagvitech76-dev-ed.develop.lightning.force.com/lightning/r/Contact/${contact.Id}/view`
+            url: `https://raagvitech76-dev-ed.develop.lightning.force.com/lightning/r/Contact/${contact.Id}/view`,
+            isEditable: false
+            
         }));
+        console.log('url ---- ', this.contactsWithUrls.url);
+        console.log('isEditable ---- ', this.contactsWithUrls.isEditable);
+    }
+    // makeEditable() {
+    //     this.contactsWithUrls = this.contactsWithUrls.map(contact => ({
+    //         ...contact,
+    //         isEditable: false
+    //     }))
+    // }
+    onClickEdit(event) {
+        // const currentId = event.target.dataSet.id;
+        // this.contactsWithUrls = this.contactsWithUrls.map(contact => (
+        //     contact.Id === currentId ? { ...contact, isEditing: true } : contact
+        //         ))
+        const contactId = event.target.dataset.id;
+        console.log(contactId);
+        this.contactsWithUrls = this.contactsWithUrls.map(contact => (
+            contact.Id === contactId ? { ...contact, isEditable: true } : contact
+        ));
+        // this.generateUrls()
+        console.log('Editable button is clicked ---- ', this.contactsWithUrls.isEditable);
     }
     
     onNext() {
@@ -116,6 +174,7 @@ export default class accountRelatedContacts extends LightningElement {
             console.log("No previous contacts to display.");
         }
     }
+
     
 }
 

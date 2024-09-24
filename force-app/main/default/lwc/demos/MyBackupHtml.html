@@ -3,11 +3,9 @@
     <lightning-card>
       <table class="slds-table slds-table_bordered slds-table_striped">
         <thead>
-          <!-- <tr> -->
-          <template for:each={labels} for:item="label">
-            <th key={label}>{label}</th>
+          <template for:each={metaDataRecords} for:item="label">
+            <th key={label.Id}>{label.Column__c}</th>
           </template>
-          <!-- </tr> -->
           <!-- <th>Name</th> 
                       <th>Phone</th>
                       <th>Email</th>
@@ -18,10 +16,10 @@
           <!-- {contacts} -->
           <!-- {displayContacts} -->
           <!-- Name	Email	Fax	Languages Owner Name	Phone -->
-          <template for:each={contactsArray} for:item="contactRow">
-            <tr key={contactRow.Id}>
-              <template for:each={contactRow} for:item="value">
-                <td key={value}>{value}</td>
+          <template for:each={displayContacts} for:item="contact">
+            <tr key={contact.Id}>
+              <template for:each={metaDataRecords} for:item="eachRecord">
+                <td key={eachRecord.Id}>{contact.Name}</td>
               </template>
             </tr>
             <!-- </template> -->

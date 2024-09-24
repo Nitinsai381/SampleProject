@@ -1,61 +1,88 @@
 import { LightningElement,wire,api } from 'lwc';
-// import accountContacts from '@salesforce/apex/AccountRelatedContacts.accountContacts';
-import accountContacts from '@salesforce/apex/AccountRelatedContacts.dynamicAccountContacts';
-import contactLabels from '@salesforce/apex/AccountRelatedContacts.contactLabels';
+import accountContacts from '@salesforce/apex/AccountRelatedContacts.relatedContactsTable';
 
 export default class accountRelatedContacts extends LightningElement {
     @api recordId;
-     contacts = [];
-     displayContacts = [];
-     error;
-     notEmpty = false;
-    contactsWithUrls = [];
-    perSize = 5;
-    start = 0;
-    pageCount = 1;
-    totalPages;
-    metaDataRecords;
-    
-    
-    @wire(accountContacts, { accId : '$recordId' })
-    wiredData({ data, error }) {
+    contacts={};
+    // dynamicContacts={};
+    labels=[];
+    contactData = [];
+    contactsArray = [];
+    contactKeys=[];
+    notEmpty = false;
+    @wire(accountContacts, { accId: '$recordId' })
+    wiredData({ data, error }){
         if (data) {
-            console.log('recordId--', this.recordId);
-            console.log('inside data coming');
-            /**
-             * [
-             *  {colName : 'value}.,
-             * 
-             * 
-             * contacts : [records];
-             * ]
-             * [
-             *  {'Name' : 'value', 'Email' : value}
-             *  {'Name' : 'value', 'Email' : value}
-             *  {'Name' : 'value', 'Email' : value}
-             *  {'Name' : 'value', 'Email' : value}
-             *  {'Name' : 'value', 'Email' : value}
-             *  {'Name' : 'value', 'Email' : value}
-             * ]
-             * [
-             *  {colname : new map (name => value)}
-             * ]
-             */
+            console.log(data);
+            console.log(typeof data);
             this.contacts = data;
-            console.log('Contacts data ---- ', this.contacts);
-            this.generateUrls();
-            // this.makeEditable();
-            this.totalPages = Math.ceil(this.contacts.length / this.perSize);
-            console.log('Total pages ______ ', this.totalPages);
-            // this.notEmpty = this.contacts.length === 0 ? false : true;
             this.notEmpty = this.contacts.length > 0;
-            // console.log('contacts----> ', this.contacts);
-            this.updateDisplayContacts();
-            console.log("Contacts available : ",this.notEmpty)
-            console.log('contacts----> ', this.contactsWithUrls);
-            // this.error = undefined;
+            console.log('Has contacts ===: ', this.notEmpty);
+            console.log('this.contacts--', this.contacts);
+            // this.contacts = data;
+            console.log('Data available ---- ',JSON.parse( JSON.stringify(data)));
+            // this.jsonformatData = JSON.stringify(this.contacts[0]);
+        //    this.contacts.data.forEach(element => {
+        //        this.labels.push(element.columnName);
+            //    });
+        //     for (let key in this.contacts) {
+        //      if(key ==='data')  { for (let key2 in key) {
+        //             if (key2 === 'columnName') {
+                    
+        //                 console.log('this is key----',key);
+        //                 this.contactLabels.push(key.columnName);
+        //             }
+        //        }}
+            //    }
+            // this.updateDisplayContacts();
+            this.labels = this.contacts.slice(0,data.length - 1);
+            console.log('Data in labels after slice ---- ', JSON.stringify(this.labels));
+            this.contactData = this.contacts.slice(this.contacts.length - 1, this.contacts.length);
+            console.log('Data in contacts after slice ---- ', JSON.stringify(this.contactData));
+            this.labels = this.labels.map(label => label.columnName);
+            console.log('Data in labels ---- ', JSON.stringify(this.labels));
+
+            this.contactKeys = this.labels.map(column =>column.replace(' ', '.') );
+                
+           
+            console.log('Keys in contacts from labels ===== ',JSON.stringify(this.contactKeys))
+            // this.contactKeys = Object.keys(this.contactKeys[0].contacts[0]);
+            // console.log('Keys in contacts ===== ',JSON.stringify(this.contactKeys))
+            // console.log('Data in contactData ---- ', JSON.stringify(this.contactData));
+            // console.log('Contact object values',JSON.stringify( Object.values(this.contactData)))
+            // this.dynamicContacts = {
+               
+            //     labels: this.labels,
+            //     contacts: this.contactData
+            // };
+            // console.log('Data with labels and contacts ---- ', JSON.stringify(this.dynamicContacts));
+
+            // for (let key in this.contactKeys) {
+            //     if(key != null){
+            //         for (let contact in this.contactData[0].contacts) {
+            //         if(contact!=null){
+            //         this.contactsArray.push(contact.map(con => {
+            //            return (con[key] || null)
+            //         }))}
+            //     }
+            // }
+            // }
+            // this.contactsArray = this.contactData[0].contacts.forEach(contact => {
+            // this.contactsKeys.map(key => {
+            //     return [contact[key]];
+            // });
+            // })
+            
+            this.contactsArray = this.contactData[0].contacts.map(contact => {
+                return this.contactKeys.map(key => {
+                    
+                    return key.split('.').reduce((obj, prop) => obj && obj[prop], contact) || null;
+                });
+            });
+            console.log('Contacts in ContactsArray ==== ', JSON.stringify(this.contactsArray));
+
+          
         }
-        
         else if (error) {
             this.error = error;
             this.contacts = [];
@@ -63,119 +90,35 @@ export default class accountRelatedContacts extends LightningElement {
             console.log("Error in fetching data..")
         }
     }
-
-    // Custom metadata fetching 
-    @wire(contactLabels)
-    wireLabelData({ data, error }) {
-        if (data) {
-            this.metaDataRecords=data;
-            console.log('MetaDataLabels----', this.metaDataRecords);   
-        }
-        else if (error) {
-            console.log('Error in fetching labels for MetaData ---- ',error);
-            
-        }
-      }
-    
-
-    updateDisplayContacts() {
-        this.displayContacts = this.contactsWithUrls.slice(this.start, this.start + this.perSize);
-        console.log("data"+ this.contactsWithUrls);
+    // updateDisplayContacts() {
+    //     this.contacts = this.contacts.slice(this.start, this.start + this.perSize);
+    //     console.log("data"+ this.contacts);
         
-    }
-    // displayContacts =  this.contacts.slice(this.start, this.start + this.perSize);
-
-    
-    get isPreviousDisable() {
-        // let isDisable = true;
-        return (this.start === 0)
-            
-        //     isDisable = false;
-        // }
-        // return isDisable;
-    }
-    get isNextDisable() {
-        return ((this.contacts.length - this.start) <= this.perSize)
-    }
+    // }
+    // onNext() {
         
-    // console.log("Contacts after slice",displayContacts);
-    // contacts_url() {
-    //     for (let i = 0; i < this.contacts.length; i++){
-    //         // let contact = this.contacts[i];
-    //         // let url = 'url';
-    //         // this.contacts[i][url]="https://raagvitech76-dev-ed.develop.lightning.force.com/lightning/r/Contact/"+this.contacts[i].Id+"/view";
-    //         // contact[url] = '/' + contact.Id + '/view';
-    //         this.contacts[i].url = "https://raagvitech76-dev-ed.develop.lightning.force.com/lightning/r/Contact/" + this.contacts[i].Id + "/view";
+    //     if (this.start + this.perSize < this.contacts.length) {
+    //         this.start += this.perSize;
+    //         this.updateDisplayContacts();
+    //         this.pageCount += 1
+    //         console.log('Total pages ---- ',Math.floor(this.contacts.length / this.perSize));
+    //     } else {
+    //         console.log("No more contacts to display.");
     //     }
     // }
-    get computedContacts() {
-        return this.displayContacts.map(contact => {
-            const contactValues = {};
-            this.metaDataRecords.forEach(record => {
-                contactValues[record.Column_Api_Name__c] = contact[record.Column_Api_Name__c];
-            });
-            return {
-                ...contact,
-                contactValues
-            };
-        });
-    }
-    getContactValue(contact, columnName) {
-        return contact[columnName];
-    }
-    generateUrls() {
-        this.contactsWithUrls = this.contacts.map(contact => ({
-            ...contact,
-            url: `https://raagvitech76-dev-ed.develop.lightning.force.com/lightning/r/Contact/${contact.Id}/view`,
-            isEditable: false
-            
-        }));
-        console.log('url ---- ', this.contactsWithUrls.url);
-        console.log('isEditable ---- ', this.contactsWithUrls.isEditable);
-    }
-    // makeEditable() {
-    //     this.contactsWithUrls = this.contactsWithUrls.map(contact => ({
-    //         ...contact,
-    //         isEditable: false
-    //     }))
+    // onPrevious() {
+        
+    //     if (this.start - this.perSize >= 0) {
+    //         this.start -= this.perSize;
+    //         this.updateDisplayContacts();
+    //         this.pageCount-=1
+    //     } else {
+    //         console.log("No previous contacts to display.");
+    //     }
     // }
-    onClickEdit(event) {
-        // const currentId = event.target.dataSet.id;
-        // this.contactsWithUrls = this.contactsWithUrls.map(contact => (
-        //     contact.Id === currentId ? { ...contact, isEditing: true } : contact
-        //         ))
-        const contactId = event.target.dataset.id;
-        console.log(contactId);
-        this.contactsWithUrls = this.contactsWithUrls.map(contact => (
-            contact.Id === contactId ? { ...contact, isEditable: true } : contact
-        ));
-        // this.generateUrls()
-        console.log('Editable button is clicked ---- ', this.contactsWithUrls.isEditable);
-    }
-    
-    onNext() {
-        
-        if (this.start + this.perSize < this.contactsWithUrls.length) {
-            this.start += this.perSize;
-            this.updateDisplayContacts();
-            this.pageCount += 1
-            console.log('Total pages ---- ',Math.floor(this.contactsWithUrls.length / this.perSize));
-        } else {
-            console.log("No more contacts to display.");
-        }
-    }
-    onPrevious() {
-        
-        if (this.start - this.perSize >= 0) {
-            this.start -= this.perSize;
-            this.updateDisplayContacts();
-            this.pageCount-=1
-        } else {
-            console.log("No previous contacts to display.");
-        }
-    }
 
-    
 }
+
+
 
 

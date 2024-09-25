@@ -1,7 +1,9 @@
 <template>
   <template if:true={notEmpty}>
     <lightning-card>
-      <table class="slds-table slds-table_bordered slds-table_striped">
+      <table
+        class="slds-table slds-table_bordered slds-table_cell-buffer slds-table_col-bordered"
+      >
         <thead>
           <!-- <tr> -->
           <template for:each={labels} for:item="label">
@@ -18,10 +20,10 @@
           <!-- {contacts} -->
           <!-- {displayContacts} -->
           <!-- Name	Email	Fax	Languages Owner Name	Phone -->
-          <template for:each={contactsArray} for:item="contactRow">
+          <template for:each={slicedContactsArray} for:item="contactRow">
             <tr key={contactRow.Id}>
-              <template for:each={contactRow} for:item="value">
-                <td key={value}>{value}</td>
+              <template for:each={contactRow.record} for:item="value">
+                <td key={contactRow.Id}>{value}</td>
               </template>
             </tr>
             <!-- </template> -->

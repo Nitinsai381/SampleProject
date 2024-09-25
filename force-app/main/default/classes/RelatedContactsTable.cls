@@ -1,25 +1,18 @@
 public class RelatedContactsTable {
-  @AuraEnabled
-  public String columnName;
+  // @AuraEnabled
+  // public String columnName;
   // @AuraEnabled
   // public String columnApiName;
   @AuraEnabled
   public List<Contact> contacts;
-  // public RelatedContactsTable() {
-  // }
-  public RelatedContactsTable(String columnName) {
-    // List<Contact> contacts
-    this.columnName = columnName;
-    // this.columnApiName = columnApiName;
-    // this.contacts = contacts;
+
+  @AuraEnabled
+  public List<RelatedContact__mdt> columns;
+
+  public RelatedContactsTable(List<RelatedContact__mdt> columns) {
+    this.columns = columns;
   }
-  public RelatedContactsTable(
-    // String columnName,
-    // String columnApiName,
-    List<Contact> contacts
-  ) {
-    // this.columnName = columnName;
-    // this.columnApiName = columnApiName;
+  public RelatedContactsTable(List<Contact> contacts) {
     this.contacts = contacts;
   }
 }

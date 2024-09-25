@@ -74,8 +74,8 @@ public with sharing class AccountRelatedContacts {
     Set<String> columns = new Set<String>();
     for (RelatedContact__mdt mdt : rcMdt) {
       columns.add(mdt.Column_Api_Name__c);
-      rctList.add(new RelatedContactsTable(mdt.Column__c));
     }
+    rctList.add(new RelatedContactsTable(rcMdt));
     String query = 'Select Id, ';
     query +=
       String.join(columns, ', ') +

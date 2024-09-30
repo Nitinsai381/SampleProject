@@ -1,0 +1,7 @@
+<template>
+  <lightning-card title="Parent To Child Component For API Property">
+    <input type="text" value={message} onchange={handleMessage} />
+    <button onclick={handleSubmit}>Submit</button>
+    <c-child-component message={message}></c-child-component>
+  </lightning-card>
+</template>

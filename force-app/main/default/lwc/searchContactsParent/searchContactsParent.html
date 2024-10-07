@@ -1,0 +1,16 @@
+<template>
+  <lightning-card>
+    <div style="padding-left: 2%">
+      <label>Search </label>
+      <input type="text" name="contact" />
+      <button type="submit" onclick={handleSearch}>Search</button>
+    </div>
+
+    <template if:true={isSearched}>
+      <br /><br />
+      <c-search-contacts-child
+        contactsfound={searchedContacts}
+      ></c-search-contacts-child>
+    </template>
+  </lightning-card>
+</template>

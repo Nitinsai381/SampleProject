@@ -6,14 +6,15 @@
       <th>Name</th>
       <th>Email</th>
       <th>Phone</th>
-      <!-- <th>Ow</th> -->
     </thead>
     <tbody>
-      <tr>
-        <td>{contact.Name}</td>
-        <td>{contact.Email}</td>
-        <td>{contact.Phone}</td>
-      </tr>
+      <template for:each={contactsfound} for:item="contact">
+        <tr key={contact.Id}>
+          <td>{contact.Name}</td>
+          <td>{contact.Email}</td>
+          <td>{contact.Phone}</td>
+        </tr>
+      </template>
     </tbody>
   </table>
 </template>

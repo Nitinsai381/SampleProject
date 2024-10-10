@@ -1,0 +1,28 @@
+<template>
+  <lightning-layout>
+    <lightning-layout-item size="4">
+      <template if:true={isdisabled}>
+        <lightning-combobox
+          name="SObject"
+          value={value}
+          options={options}
+          placeholder="Select object"
+          onchange={handleChange}
+        >
+        </lightning-combobox>
+      </template>
+      <template if:false={isdisabled}>
+        <lightning-combobox
+          name="SObject"
+          value={value}
+          options={options}
+          placeholder="Select object"
+          onchange={handleChange}
+          disabled
+        >
+        </lightning-combobox>
+      </template>
+    </lightning-layout-item>
+  </lightning-layout>
+  <!-- <p>Value = {value}</p> -->
+</template>

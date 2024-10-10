@@ -1,0 +1,70 @@
+<template>
+  <template if:true={isSearch}>
+    <c-dynamic-search
+      record-list={recordsData}
+      label-list={labelsData}
+      onsearchedobject={updateValues}
+    ></c-dynamic-search>
+  </template>
+  <c-dynamic-Drop-Down
+    onselectobject={handleSelect}
+    record-id={recordId}
+  ></c-dynamic-Drop-Down>
+
+  <!-- <p>{ObjectValue} and {value}</p> -->
+
+  <template if:true={isEmpty}>
+    <lightning-card>
+      <!-- <br /> -->
+
+      <h2>
+        <b><center>{ObjectValue} data</center></b>
+      </h2>
+      <br />
+      <table
+        class="slds-table slds-table_bordered slds-table_cell-buffer slds-table_col-bordered"
+      >
+        <thead>
+          <template for:each={labelsData} for:item="label">
+            <th key={label.Id}>{label.Label}</th>
+          </template>
+        </thead>
+        <tbody>
+          <template for:each={slicedContactsArray} for:item="data">
+            <tr key={data.Id}>
+              <template for:each={data.record} for:item="value">
+                <td key={data.Id}>{value}</td>
+              </template>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+      <!-- <c-dynamic-pagination records={structuredData}></c-dynamic-pagination> -->
+      <div style="display: flex; justify-content: center; margin-top: 3%">
+        <button
+          disabled={isPreviousDisable}
+          onclick={onPrevious}
+          class="slds-button slds-button_brand"
+          style="margin-right: 2%"
+        >
+          Previous
+        </button>
+        <span> {pageCount} of {totalPages} </span>
+        <button
+          disabled={isNextDisable}
+          onclick={onNext}
+          class="slds-button slds-button_brand"
+          style="margin-left: 2%"
+        >
+          Next
+        </button>
+      </div>
+    </lightning-card>
+  </template>
+
+  <template if:false={isEmpty}>
+    <lightning-card>
+      <h4>No data available</h4>
+    </lightning-card>
+  </template>
+</template>

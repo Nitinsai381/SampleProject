@@ -1,5 +1,5 @@
 import { api, LightningElement,wire } from 'lwc';
-import dynamicTableData from '@salesforce/apex/DynamicTable.dynamicTableData';
+import dynamicTableData from '@salesforce/apex/DynamicTable.dynamicTableDataHere';
 export default class DynamicTable extends LightningElement {
     @api recordId
     ObjectValue;
@@ -34,25 +34,25 @@ export default class DynamicTable extends LightningElement {
     @wire(dynamicTableData, ({ id: '$recordId', objectName: '$ObjectValue' }))
     wiredData({ data, error }) {
         if (data) {
-            this.isEmpty = (data[1].objectType.length > 0)
+            this.isEmpty = (data.data.objectType.length > 0)
             console.log('isEmpty ====',this.isEmpty)
             console.log('Data here ==== ', data)
-            console.log('Data here ==== ', data[1].objectType)
-            console.log('Data here ==== ', data[0].columns[0].Field_Config__r)
+            // console.log('Data here ==== ', data[1].objectType)
+            // console.log('Data here ==== ', data[0].columns[0].Field_Config__r)
            // this.ObjectTableValues = data[0]
-            this.columnLabels = data[0].columns.map(column => {
-                return column.Field_Config__r
-            })
+            // this.columnLabels = data.data.columns.map(column => {
+            //     return column.Field_Config__r
+            // })
             console.log('columnLabels here ==== ', JSON.stringify(this.columnLabels))
-            this.ObjectTableValues = {columns : this.columnLabels, records : data[1].objectType}
-            this.recordsData = this.ObjectTableValues.records;
-            this.labelsData=this.ObjectTableValues.columns
+            // this.ObjectTableValues = {columns : this.columnLabels, records : data[1].objectType}
+            this.recordsData = data.data.objectType;
+            this.labelsData=data.data.columns
             console.log('ObjectTableValues here ==== ', JSON.stringify(this.ObjectTableValues))
             console.log('labelsData here ==== ', JSON.stringify(this.labelsData))
             console.log('recordsData here ==== ', JSON.stringify(this.recordsData))
             this.isSearch = this.recordsData.length > 5
             console.log('Search ==== ',this.search)
-            console.log('values before if ==== ',this.values)
+            console.log('values before if ==== ',JSON.stringify(this.values))
             this.structure()
             this.updateDisplayContacts()
         }
@@ -89,7 +89,7 @@ export default class DynamicTable extends LightningElement {
     buildRecord(contact){
         let record=[];
         this.labelsData.forEach(col => {
-            record.push(contact[col.Field_Api_Name__c]);
+            record.push(contact[col.Field_Api_Name]);
         
         });
         return record;
@@ -98,7 +98,7 @@ export default class DynamicTable extends LightningElement {
     updateDisplayContacts() {
         // this.slicedContactsArray = this.structuredData.slice(this.start, this.start + this.perSize);
         this.slicedContactsArray = this.structuredData.slice(this.start, this.start + this.perSize);
-        console.log("Sliced structuredData for pagination -- "+ this.slicedContactsArray);
+        console.log("Sliced structuredData for pagination -- "+ JSON.stringify(this.slicedContactsArray));
         
     }
     

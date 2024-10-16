@@ -31,11 +31,15 @@ public with sharing class DynamicTable {
   // }
 
   @AuraEnabled(cacheable=true)
-  public static Map<String, DynamicTableWrapper> dynamicTableDataHere(
+  public static DynamicTableWrapper dynamicTableDataHere(
     Id id,
     String objectName
   ) {
-    Map<String, DynamicTableWrapper> tableData = new Map<String, DynamicTableWrapper>();
+    Map<String, Schema.SObjectField> fieldsValid = Schema.getGlobalDescribe()
+      .get(objectName)
+      .getDescribe()
+      .fields.getMap();
+    //  Map<String, DynamicTableWrapper> tableData = new Map<String, DynamicTableWrapper>();
     List<Map<String, String>> columnsData = new List<Map<String, String>>();
     Set<String> cols = new Set<String>();
     for (Object_Field_Config__mdt colMdt : [
@@ -43,26 +47,28 @@ public with sharing class DynamicTable {
       FROM Object_Field_Config__mdt
       WHERE Object_Config__r.label = :objectName
     ]) {
-      columnsData
-        .add(
-          new Map<String, String>{
-            'Id' => colMdt.Field_Config__r.Id,
-            'Label' => colMdt.Field_Config__r.Label,
-            'Field_Api_Name' => colMdt.Field_Config__r.Field_Api_Name__c
-          }
-        );
-      cols.add(colMdt.Field_Config__r.Field_Api_Name__c);
+      if (fieldsValid.containsKey(colMdt.Field_Config__r.Field_Api_Name__c)) {
+        columnsData
+          .add(
+            new Map<String, String>{
+              'Id' => colMdt.Field_Config__r.Id,
+              'Label' => colMdt.Field_Config__r.Label,
+              'Field_Api_Name' => colMdt.Field_Config__r.Field_Api_Name__c
+            }
+          );
+        cols.add(colMdt.Field_Config__r.Field_Api_Name__c);
+      }
     }
-    // tableData.put('columns', new DynamicTableWrapper(columnsData));
 
     String query = 'Select Id, ';
     query +=
       String.join(cols, ', ') +
       ' from ' +
       objectName +
-      ' Where AccountId=: id';
+      ' Where AccountId=: id ORDER BY LastModifiedDate DESC';
     List<SObject> records = Database.query(query);
-    tableData.put('data', new DynamicTableWrapper(columnsData,records));
-    return tableData;
+    // tableData.put('data', new DynamicTableWrapper(columnsData, records));
+    return new DynamicTableWrapper(columnsData, records);
+    // return tableData;
   }
 }

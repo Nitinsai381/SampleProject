@@ -1,10 +1,6 @@
 <template>
   <template if:true={isSearch}>
-    <c-dynamic-search
-      record-list={recordsData}
-      label-list={labelsData}
-      onsearchedobject={updateValues}
-    ></c-dynamic-search>
+    <c-dynamic-search onsearchedobject={updateValues}></c-dynamic-search>
   </template>
   <c-dynamic-Drop-Down
     onselectobject={handleSelect}
@@ -40,25 +36,33 @@
         </tbody>
       </table>
       <!-- <c-dynamic-pagination records={structuredData}></c-dynamic-pagination> -->
-      <div style="display: flex; justify-content: center; margin-top: 3%">
-        <button
-          disabled={isPreviousDisable}
-          onclick={onPrevious}
-          class="slds-button slds-button_brand"
-          style="margin-right: 2%"
-        >
-          Previous
-        </button>
-        <span> {pageCount} of {totalPages} </span>
-        <button
-          disabled={isNextDisable}
-          onclick={onNext}
-          class="slds-button slds-button_brand"
-          style="margin-left: 2%"
-        >
-          Next
-        </button>
-      </div>
+      <template if:true={disableNextPrev}>
+        <div style="display: flex; justify-content: center; margin-top: 3%">
+          <button
+            disabled={isPreviousDisable}
+            onclick={onPrevious}
+            class="slds-button slds-button_brand"
+            style="margin-right: 2%"
+          >
+            Previous
+          </button>
+          <span> {pageCount} of {totalPages} </span>
+          <button
+            disabled={isNextDisable}
+            onclick={onNext}
+            class="slds-button slds-button_brand"
+            style="margin-left: 2%"
+          >
+            Next
+          </button>
+        </div>
+        <!-- <div lwc:if={showSpinner} class="exampleHolder">
+          <lightning-spinner
+            alternative-text="Loading"
+            size="large"
+          ></lightning-spinner>
+        </div> -->
+      </template>
     </lightning-card>
   </template>
 

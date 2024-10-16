@@ -1,12 +1,13 @@
 import { LightningElement,api} from 'lwc';
 
 export default class DynamicDropDown extends LightningElement {
-    @api recordId;
+    @api objectApiName;
 
     value;
     get isdisabled() {
-        console.log('recordId====',this.recordId)
-        return (this.recordId.charAt(2)==='1'? true:false)
+        console.log('objectApiName====',this.objectApiName)
+        console.log('objectApiName disable ====',(this.objectApiName==='Account'))
+        return (!(this.objectApiName==='Account'))
     }
     get options() {
         return [{ label: 'Case', value: 'Case' }, { label: 'Contact', value: 'Contact' }, { label: 'Opportunity', value: 'Opportunity' }];

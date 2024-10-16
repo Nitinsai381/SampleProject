@@ -2,6 +2,7 @@ import { api, LightningElement,wire } from 'lwc';
 import dynamicTableData from '@salesforce/apex/DynamicTable.dynamicTableDataHere';
 export default class DynamicTable extends LightningElement {
     @api recordId
+    @api objectApiName;
     ObjectValue;
     columnLabels;
     ObjectTableValues;
@@ -158,7 +159,6 @@ export default class DynamicTable extends LightningElement {
                         }
                     }
                 })
-    
          })
         }
         this.pageCount=1

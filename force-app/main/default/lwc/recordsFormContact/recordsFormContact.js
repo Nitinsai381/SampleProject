@@ -5,7 +5,7 @@ import FIRST_NAME_FIELD from "@salesforce/schema/Contact.FirstName";
 import LAST_NAME_FIELD from "@salesforce/schema/Contact.LastName";
 import PHONE_FIELD from "@salesforce/schema/Contact.MobilePhone";
 import EMAIL_FIELD from "@salesforce/schema/Contact.Email";
-// import ACCOUNT_ID_FIELD from "@salesforce/schema/Contact.AccountId"
+import ACCOUNT_ID_FIELD from "@salesforce/schema/Contact.AccountId"
 
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 export default class RecordsFormContact extends LightningElement {
@@ -15,20 +15,21 @@ export default class RecordsFormContact extends LightningElement {
     mobileValue;
     accountIdValue;
     showModal = true
-    salutationsList = [
-        { label: 'Mr.', value: 'Mr.' },
-        { label: 'Ms.', value: 'Ms.' },
-        { label: 'Mrs.', value: 'Mrs.' },
-        { label: 'Dr.', value: 'Dr.' },
-        { label: 'Prof.', value: 'Prof.' },
-    ];
+    // salutationsList = [
+    //     { label: 'Mr.', value: 'Mr.' },
+    //     { label: 'Ms.', value: 'Ms.' },
+    //     { label: 'Mrs.', value: 'Mrs.' },
+    //     { label: 'Dr.', value: 'Dr.' },
+    //     { label: 'Prof.', value: 'Prof.' },
+    // ];
 
-    get salutationOptions() {
-        return this.salutationsList;
-    }
-    // handleSelectAccount(event) {
-        
+    // get salutationOptions() {
+    //     return this.salutationsList;
     // }
+    handleSelectAccount(event) {
+        this.accountIdValue = event.detail
+        console.log('Selected account in contact == ',this.accountIdValue)
+    }
     handleInput(event) {
         if (event.target.name === 'firstName') {        
             this.firstNameValue = event.target.value
@@ -46,17 +47,16 @@ export default class RecordsFormContact extends LightningElement {
             this.emailValue = event.target.value
             console.log('Email == ',this.emailValue )
         }
-        // else if (event.target.name === 'AnnualRevenue') {
-        //     this.revenueValue=event.target.value
-        // }
+
     }
     handleCreate() {
+        
         const fields = {}
         fields[FIRST_NAME_FIELD.fieldApiName] = this.firstNameValue
         fields[LAST_NAME_FIELD.fieldApiName] = this.lastNameValue
         fields[PHONE_FIELD.fieldApiName] = this.mobileValue
         fields[EMAIL_FIELD.fieldApiName] = this.emailValue
-        // fields[ACCOUNT_NUMBER_FIELD.fieldApiName] = this.accountNumberValue
+        fields[ACCOUNT_ID_FIELD.fieldApiName] = this.accountIdValue
         // fields[REVENUE_FIELD.fieldApiName] = this.revenueValue
         const recordInput = { apiName: CONTACT_OBJECT.objectApiName, fields };
         createRecord(recordInput).then(isSuccess => {

@@ -1,15 +1,18 @@
 <template>
-  <c-records-form-drop-down
-    onselectobject={handleSelect}
-  ></c-records-form-drop-down>
-  <div lwc:if={isAccountForm}>
-    <c-records-form-account></c-records-form-account>
-  </div>
-  <div lwc:elseif={isContactForm}>
-    <c-records-form-contact></c-records-form-contact>
-  </div>
-  <div lwc:elseif={isOpportunityForm}>
-    <c-records-form-opportunity></c-records-form-opportunity>
-  </div>
-  <div lwc:else><p>Select a object to create</p></div>
+  <lightning-card>
+    <h1>Create Records</h1>
+    <c-records-form-drop-down
+      onselectobject={handleSelect}
+    ></c-records-form-drop-down>
+    <div lwc:if={isAccountForm}>
+      <c-records-form-account></c-records-form-account>
+    </div>
+    <div lwc:elseif={isContactForm}>
+      <c-records-form-contact></c-records-form-contact>
+    </div>
+    <div lwc:elseif={isOpportunityForm}>
+      <c-records-form-opportunity></c-records-form-opportunity>
+    </div>
+    <div lwc:else></div>
+  </lightning-card>
 </template>

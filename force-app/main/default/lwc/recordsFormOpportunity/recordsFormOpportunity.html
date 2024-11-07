@@ -43,6 +43,7 @@
               label="Opportunity Name"
               name="oppName"
               onchange={handleInput}
+              required
             ></lightning-input>
 
             <lightning-input
@@ -50,6 +51,7 @@
               label="Close Date"
               name="closeDate"
               onchange={handleInput}
+              required
             ></lightning-input>
 
             <lightning-combobox
@@ -58,8 +60,12 @@
               options={stageOptions}
               placeholder="Select stage"
               onchange={handleInput}
+              required
             >
             </lightning-combobox>
+            <c-records-form-select-account
+              ondisplayaccounts={handleSelectAccount}
+            ></c-records-form-select-account>
           </div>
           <footer class="slds-modal__footer">
             <lightning-button

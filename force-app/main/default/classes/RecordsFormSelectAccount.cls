@@ -1,5 +1,5 @@
 public with sharing class RecordsFormSelectAccount {
-  @AuraEnabled(Cacheable=true)
+  @AuraEnabled(cacheable=true)
   public static List<Account> recordsFormSelectAccount() {
     return [SELECT Id, Name FROM Account];
   }

@@ -4,12 +4,14 @@ import OPPORTUNITY_OBJECT from "@salesforce/schema/Opportunity";
 import OPP_NAME_FIELD from "@salesforce/schema/Opportunity.Name";
 import CLOSE_DATE_FIELD from "@salesforce/schema/Opportunity.CloseDate";
 import STAGE_FIELD from "@salesforce/schema/Opportunity.StageName";
+import ACCOUNT_ID_FIELD from "@salesforce/schema/Opportunity.AccountId";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 export default class RecordsFormOpportunity extends LightningElement {
     oppNameValue;
     closeDateValue;
     stageValue;
+    accountIdValue;
     showModal = true;
 
     get stageOptions() {
@@ -30,11 +32,16 @@ export default class RecordsFormOpportunity extends LightningElement {
         }
  
     }
+    handleSelectAccount(event) {
+        this.accountIdValue = event.detail
+        console.log('Selected account in Opportunity == ',this.accountIdValue)
+    }
     handleCreate() {
         const fields = {}
         fields[OPP_NAME_FIELD.fieldApiName]=this.oppNameValue
         fields[CLOSE_DATE_FIELD.fieldApiName]=this.closeDateValue
         fields[STAGE_FIELD.fieldApiName]=this.stageValue
+        fields[ACCOUNT_ID_FIELD.fieldApiName]=this.accountIdValue
         const record = { apiName: OPPORTUNITY_OBJECT.objectApiName, fields }
         createRecord(record).then(recordOpp => {
             const notifyToast = new ShowToastEvent({

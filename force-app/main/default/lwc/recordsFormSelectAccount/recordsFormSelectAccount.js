@@ -1,10 +1,11 @@
-import { LightningElement,wire } from 'lwc';
+import { LightningElement,wire,api } from 'lwc';
 import recordsFormSelectAccount from '@salesforce/apex/RecordsFormSelectAccount.recordsFormSelectAccount'
 
 export default class RecordsFormSelectAccount extends LightningElement {
     accounts;
     accountSelected;
-    allAccounts=[];
+    allAccounts = [];
+    @api clearCombobox;
     @wire(recordsFormSelectAccount )
     wiredRecords({ data, error }) {
         if (data!==undefined) {
@@ -28,7 +29,7 @@ export default class RecordsFormSelectAccount extends LightningElement {
         }
     }
     // allAccountsOptions = this.allAccounts;
-    
+   
     get accountOptions() {
         // console.log('this.allAccounts', JSON.stringify(this.allAccounts));
         // this.accounts.forEach(each => {
@@ -39,8 +40,13 @@ export default class RecordsFormSelectAccount extends LightningElement {
         return this.allAccounts
     }
     handleChange(event) {
-        this.accountSelected = event.target.value
-        // console.log('Account selected == ', this.accountSelected)
+        if (this.clearCombobox === true) {
+            this.template.querySelector('lightning-combobox').value=null
+        } 
+       this.accountSelected =  event.target.value
+      
+        console.log('Account selected == ', this.accountSelected)
+        console.log('ClearComboBox == ', this.clearCombobox)
 
             this.dispatchEvent(new CustomEvent('displayaccounts', {'detail': this.accountSelected }))
     }

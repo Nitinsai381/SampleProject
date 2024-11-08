@@ -14,7 +14,8 @@ export default class RecordsFormAccount extends LightningElement {
     phoneValue;
     revenueValue;
     accountNumberValue;
-    showModal=true
+    showModal = true
+    disableSave=false
     get options() {
         return [{ label: 'Agriculture', value: 'Agriculture' }, { label: 'Banking', value: 'Banking' }, { label: 'Biotechnology', value: 'Biotechnology' },{ label: 'Chemicals', value: 'Chemicals' },{ label: 'Technology', value: 'Technology' }];
     }
@@ -54,14 +55,24 @@ export default class RecordsFormAccount extends LightningElement {
         }).catch(error => {
             const evt = new ShowToastEvent({
                 title: "Account Creation failed!",
-                message: "Account is not created "+error,
+                message: "Fill required fields",
                 variant: 'error',
-              });
-              this.dispatchEvent(evt);
+            });
+            console.log('Error in creation == ',JSON.stringify(error))
+            this.dispatchEvent(evt);
+            this.disableSave=false
           })
     }
+    handleCancel() {
+        this.nameValue = null;
+    }
     handleSave() {
-        this.handleCreate();
+        console.log('In Account save nameValue == ',this.nameValue)
+        if (this.nameValue !== null || this.nameValue !== '') {
+            
+            this.handleCreate();
+        }
+this.disableSave=true
     }
     // handleCancel() {
     //     // this.nameValue = ''

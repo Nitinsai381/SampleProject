@@ -13,7 +13,8 @@ export default class RecordsFormOpportunity extends LightningElement {
     stageValue;
     accountIdValue;
     showModal = true;
-
+    clearChild=false
+disableSave=false
     get stageOptions() {
         return [{ label: 'Prospecting', value: 'Prospecting' }, { label: 'Qualification', value: 'Qualification' }, { label: 'Needs Analysis', value: 'Needs Analysis' }, { label: 'Needs Analysis', value: 'Needs Analysis' }, { label: 'Closed Won', value: 'Closed Won' }, { label: 'Closed Lost', value: 'Closed Lost' }];
     }
@@ -55,13 +56,30 @@ export default class RecordsFormOpportunity extends LightningElement {
         }).catch(error => {
             const notifyToast = new ShowToastEvent({
                 title: "Opportunity creation failed!",
-                message: "Try creating again by solving issues" + error[0],
+                message: "Fill required fields",
                 variant: "error"
             })
+            console.log('Error in creation == ',JSON.stringify(error))
             this.dispatchEvent(notifyToast)
+            this.disableSave=false
         })
     }
+    handleCancel() {
+        this.clearChild = true
+        console.log('CLear child == ',this.clearChild)
+        this.oppNameValue = null
+        this.template.querySelector('lightning-combobox').value=null
+        this.template.querySelector('c-records-form-select-account').value=null
+    }
     handleSave() {
-        this.handleCreate()
+        if (this.oppNameValue !== null || this.oppNameValue !== '') {
+            
+            this.handleCreate()
+        }
+        this.disableSave=true
+    }
+    hideModalBox() {
+        this.showModal = false
+        console.log('showModal ==== ',this.showModal)
     }
 }

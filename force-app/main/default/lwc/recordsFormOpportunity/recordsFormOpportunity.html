@@ -65,6 +65,7 @@
             </lightning-combobox>
             <c-records-form-select-account
               ondisplayaccounts={handleSelectAccount}
+              clear-combobox={clearChild}
             ></c-records-form-select-account>
           </div>
           <footer class="slds-modal__footer">
@@ -72,15 +73,18 @@
               variant="neutral"
               label="cancel"
               type="reset"
+              onclick={handleCancel}
             ></lightning-button>
             <lightning-button
               variant="brand"
               label="save"
               onclick={handleSave}
+              disabled={disableSave}
             ></lightning-button>
           </footer>
         </div>
       </form>
     </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
   </template>
 </template>

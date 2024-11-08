@@ -15,6 +15,7 @@ export default class RecordsFormContact extends LightningElement {
     mobileValue;
     accountIdValue;
     showModal = true
+    disableSave=false
     // salutationsList = [
     //     { label: 'Mr.', value: 'Mr.' },
     //     { label: 'Ms.', value: 'Ms.' },
@@ -70,15 +71,20 @@ export default class RecordsFormContact extends LightningElement {
         }).catch(error => {
             const evt = new ShowToastEvent({
                 title: "Contact Creation failed!",
-                message: "Contact is not created "+error[0],
+                message: "Fill required fields",
                 variant: 'error',
             });
             console.log('Error in creation == ',JSON.stringify(error))
-              this.dispatchEvent(evt);
+            this.dispatchEvent(evt);
+            this.disableSave=false
           })
+    }
+    handleCancel() {
+        this.lastNameValue = null;
     }
     handleSave() {
         this.handleCreate();
+        this.disableSave=true
     }
 
     hideModalBox() {

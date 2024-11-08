@@ -70,15 +70,18 @@
               variant="neutral"
               label="cancel"
               type="reset"
+              onclick={handleCancel}
             ></lightning-button>
             <lightning-button
               variant="brand"
               label="save"
               onclick={handleSave}
+              disabled={disableSave}
             ></lightning-button>
           </footer>
         </div>
       </form>
     </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
   </template>
 </template>

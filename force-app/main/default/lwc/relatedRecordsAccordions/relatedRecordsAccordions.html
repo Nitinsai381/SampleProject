@@ -1,0 +1,34 @@
+<template>
+  <lightning-accordion active-section-name="a">
+    <lightning-accordion-section
+      name="Contact"
+      onclick={handleClick}
+      label="Contact"
+    >
+      <div lwc:if={objectValueCon}>
+        <c-related-records-acc-table
+          contacts-list={recordsData}
+        ></c-related-records-acc-table>
+      </div>
+    </lightning-accordion-section>
+
+    <lightning-accordion-section
+      name="Opportunity"
+      onclick={handleClick}
+      label="Opportunity"
+    >
+      <div lwc:if={objectValueOpp}>
+        <c-related-records-acc-table
+          opps-list={recordsData}
+        ></c-related-records-acc-table>
+      </div>
+    </lightning-accordion-section>
+
+    <lightning-accordion-section name="Case" onclick={handleClick} label="Case">
+      <div lwc:if={objectValueCase}>
+        <c-related-records-acc-table
+          case-list={recordsData}
+        ></c-related-records-acc-table></div
+    ></lightning-accordion-section>
+  </lightning-accordion>
+</template>

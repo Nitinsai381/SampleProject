@@ -1,0 +1,11 @@
+<template>
+  <template for:each={accountsList} for:item="account">
+    <lightning-accordion allow-multiple-sections-open key={account.Id}>
+      <lightning-accordion-section name={account.Id} label={account.Name}>
+        <c-related-records-accordions
+          account-id={account.Id}
+        ></c-related-records-accordions>
+      </lightning-accordion-section>
+    </lightning-accordion>
+  </template>
+</template>

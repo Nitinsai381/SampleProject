@@ -10,31 +10,29 @@ export default class RelatedRecordsAccordions extends LightningElement {
     isClicked = false
     objectValueCon=false
     objectValueOpp=false
-    objectValueCase=false
+    objectValueCase = false
+   
     // isContact = this.objectType === 'Contact'
     // isOpp = this.objectType === 'Opportunity'
     // isCase = this.objectType === 'Case'
     handleClick(event) {
-        this.objectType = event.target.name;  // Capture object type from the clicked element
-        this.isClicked = true;  // Set the clicked state
-    
+        this.objectType = event.target.name;  
+        this.isClicked = true;
+      
         relatedObjectsList({ accId: this.accountId, objectName: this.objectType })
             .then(result => {
+                
                 console.log('result:', result);
-    
-                // Process the result data (if any) and assign it to recordsData
+                this.isClicked = false;
                 const resultData = result ? result.map(each => each) : null;
                 this.recordsData = resultData;
-    
-                // Log the records data to verify
+  
                 console.log('recordsData:', JSON.stringify(this.recordsData));
     
-                // Now, set the values based on the object type after the async call
                 this.objectValueCon = this.objectType === 'Contact';
                 this.objectValueOpp = this.objectType === 'Opportunity';
                 this.objectValueCase = this.objectType === 'Case';
-                   
-                // Now the correct accountId and objectType are available
+         
                 console.log('objectValueCon:', this.objectValueCon);
                 console.log('objectValueOpp:', this.objectValueOpp);
                 console.log('objectValueCase:', this.objectValueCase);

@@ -31,4 +31,8 @@
         ></c-related-records-acc-table></div
     ></lightning-accordion-section>
   </lightning-accordion>
+  <div if:true={isClicked} class="slds-is-relative">
+    <lightning-spinner alternative-text="Loading..." variant="brand">
+    </lightning-spinner>
+  </div>
 </template>

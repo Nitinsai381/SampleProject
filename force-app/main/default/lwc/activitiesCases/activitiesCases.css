@@ -1,0 +1,77 @@
+.activities-card{
+    background-color: #f3f3f3 ;
+    height: 12rem;
+    border-radius: 5px;
+    border:2px solid #e9e9e9 ;
+    padding: 2%;
+    margin-bottom: 1rem;
+    /* border: 52px; */
+}
+.head-name{
+    margin-top: 0.2rem;
+    font-weight: 700;
+}
+.search{
+    /* align-content:end; */
+    display: flex;
+    justify-content: right;
+    height: fit-content;
+    align-content: stretch;
+}
+.search-box{
+    display: flex;
+    padding-bottom: 1rem;
+    padding-top: -1rem;
+}
+.drop-down, .head-layout {
+    display: flex;
+    flex-direction: row;
+    
+}
+.reset {
+    display: flex;
+    flex-direction: column;
+    margin: 0.17rem;
+    color: #4b4b4b;
+}
+.reset label{
+    margin-bottom: 0.17rem  ;
+}
+.btn{
+    margin-left: 1rem;
+    color: #444444; 
+}
+.check-box{
+    margin-top: 0.55rem;
+}
+.head-layout{
+margin-bottom: 0.3rem;
+}
+lightning-combobox{
+    width: 10rem;
+    height: 0.8rem;
+    margin-right: 0.5rem;
+}
+lightning-icon{
+    margin-right: 0.5rem ;
+    /* background-color: rgb(19, 184, 129); */
+}
+/* .external-accordion{
+    background-color: #ffffff;
+} */
+.inner-accordion{
+    background-color: #ffffff;
+}
+.Ext-acc-sec{
+    background-color: #ffffff;
+}
+.slds-icon-standard-swarm-session{
+    background-color: rgb(39, 173, 144);
+}
+/* .section-control{
+
+} */
+button.section-control.slds-button.slds-button_reset.slds-accordion__summary-action{
+    background-color: #e13b3b;
+}
+

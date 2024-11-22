@@ -1,0 +1,111 @@
+<template>
+  <div class="activities-card">
+    <div class="activities-inner"></div>
+    <div class="activities-header">
+      <lightning-layout>
+        <lightning-layout-item size="6" class="head-layout">
+          <span
+            ><lightning-icon
+              class="icon"
+              icon-name="standard:swarm_session"
+              size="large"
+            ></lightning-icon
+          ></span>
+          <span class="head-span"
+            ><h1 class="head-name">Activities</h1>
+            <p id="timer">18 items. {valueTime}</p></span
+          >
+        </lightning-layout-item>
+
+        <lightning-layout-item size="6" class="search">
+          <!-- <input
+            type="search"
+            placeholder="Search by case number"
+            name="search"
+            id="search"
+          /> -->
+          <!-- <div onkeyup={handleKeyUp}> -->
+          <lightning-layout>
+            <lightning-layout-item size="12">
+              <lightning-input
+                type="search"
+                name="search"
+                class="search-box"
+                placeholder="Search by case number"
+              ></lightning-input>
+            </lightning-layout-item>
+            <lightning-layout-item size="12"></lightning-layout-item>
+          </lightning-layout>
+
+          <!-- </div> -->
+        </lightning-layout-item>
+      </lightning-layout>
+    </div>
+    <div class="activities-inner">
+      <lightning-layout>
+        <lightning-layout-item size="8" class="drop-down">
+          <lightning-combobox
+            label="Date Range"
+            options={dateOptions}
+            class="date"
+            onchange={handleDateChange}
+            value={dateValue}
+            placeholder="All times"
+          ></lightning-combobox>
+          <lightning-combobox
+            label="Activity Type"
+            options={typesOptions}
+            class="type"
+            onchange={handleTypeChange}
+            value={typeValue}
+            placeholder="All Types"
+          ></lightning-combobox>
+          <lightning-combobox
+            label="Status"
+            options={statusOptions}
+            class="status"
+            onchange={handleStatusChange}
+            value={statusValue}
+            placeholder="All Statuses"
+          ></lightning-combobox>
+        </lightning-layout-item>
+        <lightning-layout-item size="2">
+          <div class="reset">
+            <label for="Clear filters">clear filters</label>
+            <lightning-button-icon
+              class="btn"
+              icon-name="utility:refresh"
+              onclick={handleRefresh}
+            ></lightning-button-icon></div
+        ></lightning-layout-item>
+      </lightning-layout>
+    </div>
+    <div class="check-box">
+      <lightning-input
+        type="checkbox"
+        label="Assigned to me"
+        name="checkBox"
+      ></lightning-input>
+    </div>
+  </div>
+  <!-- <div class="casesAccordion"> -->
+  <lightning-accordion class="external-accordion" allow-multiple-sections-open>
+    <lightning-accordion-section
+      class="Ext-acc-sec"
+      label="Activities with Case Number"
+    >
+      <template for:each={caseList} for:item="caseName">
+        <lightning-accordion
+          key={caseName}
+          class="inner-accordion"
+          allow-multiple-sections-open
+        >
+          <lightning-accordion-section
+            label={caseName}
+          ></lightning-accordion-section>
+        </lightning-accordion>
+      </template>
+    </lightning-accordion-section>
+  </lightning-accordion>
+  <!-- </div>  -->
+</template>

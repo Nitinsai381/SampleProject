@@ -88,7 +88,7 @@ export default class ActivitiesCases extends LightningElement {
 
     renderedCallback() {
         
-        const initTime = this.initialTime
+        const initTime = this.initialTime     
         // eslint-disable-next-line @lwc/lwc/no-async-operation
         setInterval(() => {
             

@@ -19,7 +19,7 @@ describe('c-just-for-test', () => {
         document.body.appendChild(element);
 
         // Assert
-        // const div = element.shadowRoot.querySelector('div');
-        expect(1).toBe(1);
+        const h1 = element.shadowRoot.querySelector('h1');
+        expect(h1.textContent).toBe("Just for Test! value = Contact");
     });
 });

@@ -18,7 +18,7 @@ export default class AccountListAccordion extends LightningElement {
 // this.accountId = event.target.name
 //         console.log('Account Clicked == ',this.accountId)
 //     }
-    // get accountIdFromParent() {
-    //     return this.accountId;
-    // }
+    get accountIdFromParent() {
+        return this.accountId;
+    }
 }

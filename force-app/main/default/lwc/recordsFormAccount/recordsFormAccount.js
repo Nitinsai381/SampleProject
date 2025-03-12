@@ -55,10 +55,9 @@ export default class RecordsFormAccount extends LightningElement {
         }).catch(error => {
             const evt = new ShowToastEvent({
                 title: "Account Creation failed!",
-                message: "Fill required fields",
+                message: "Account is not created "+error,
                 variant: 'error',
-            });
-            console.log('Error in creation == ',JSON.stringify(error))
+              });
             this.dispatchEvent(evt);
             this.disableSave=false
           })

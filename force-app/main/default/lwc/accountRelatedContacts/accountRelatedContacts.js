@@ -203,6 +203,3 @@ export default class accountRelatedContacts extends LightningElement {
     * return x;
     * }
     */
-
-
-

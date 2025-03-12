@@ -22,27 +22,22 @@
 @isTest
 private class ContactTriggerTest {
   @TestSetup
-  static void makeData() {
-    // UserRole roleidval = [SELECT Id FROM UserRole WHERE Name = 'Western Sales Team' LIMIT 1]; UserRoleId = roleidval.Id
+  static void makeData(){
+   // UserRole roleidval = [SELECT Id FROM UserRole WHERE Name = 'Western Sales Team' LIMIT 1]; UserRoleId = roleidval.Id
     Profile p = [SELECT Id FROM Profile WHERE Name = 'Test Profile' LIMIT 1];
-    User user1 = new User(
-      Alias = 'standt',
-      Email = 'standarduser@testorg.com',
-      EmailEncodingKey = 'UTF-8',
-      LastName = 'Testing',
-      LanguageLocaleKey = 'en_US',
-      LocaleSidKey = 'en_US',
-      ProfileId = p.Id,
-      TimeZoneSidKey = 'America/Los_Angeles',
-      UserName = 'testUser12321@testorg.com'
+    User user1 = new User(Alias = 'standt',
+    Email = 'standarduser@testorg.com',
+    EmailEncodingKey = 'UTF-8',
+    LastName = 'Testing',
+    LanguageLocaleKey = 'en_US',
+    LocaleSidKey = 'en_US',
+    ProfileId = p.Id,
+    TimeZoneSidKey = 'America/Los_Angeles',
+    UserName = 'testUser12321@testorg.com'
     );
     insert user1;
-    PermissionSet ps = [
-      SELECT Id
-      FROM PermissionSet
-      WHERE Id = '0PSNS000001KXth'
-    ];
-
+    PermissionSet ps =[select Id from PermissionSet where Id = '0PSNS000001KXth'];
+    
     PermissionSetAssignment psa = new PermissionSetAssignment(
       AssigneeId = user1.Id,
       PermissionSetId = ps.Id
@@ -50,38 +45,27 @@ private class ContactTriggerTest {
     insert psa;
   }
   @isTest
-  static void userTest() {
-    // Account a = new Account(Name='AccountUser', Status__c=true);
-    // insert a;
-    User newUser1 = [
-      SELECT Id, Name
-      FROM User
-      WHERE Username = 'testUser12321@testorg.com'
-    ];
-    Account a = new Account(Name = 'AccountUser', Status__c = true);
+static void userTest(){
+  // Account a = new Account(Name='AccountUser', Status__c=true);
+  // insert a;
+    User newUser1 = [select Id, Name from User where Username ='testUser12321@testorg.com'];
+    Account a = new Account(Name='AccountUser', Status__c=true);
     insert a;
     Test.startTest();
-    System.runAs(newUser1) {
+    System.runAs(newUser1){
       // Account ac = [SELECT Id, Status__c FROM Account WHERE Id =: a.Id];
       System.debug(a.Status__c);
-
+    
       // UserTest.userTest();
-      a.Status__c = false;
+      a.Status__c=false;
       update a;
-
-      Account acc = [
-        SELECT Id, Status__c
-        FROM Account
-        WHERE Name = 'AccountUser'
-      ];
+      
+      
+      Account acc = [SELECT Id, Status__c FROM Account WHERE Name = 'AccountUser'];
       System.debug(a.Status__c);
       Test.stopTest();
       System.debug(a.Status__c);
-      System.assertEquals(
-        false,
-        a.Status__c,
-        'Account status should be updated'
-      );
+      System.assertEquals(false, a.Status__c,'Account status should be updated');
     }
 
   }

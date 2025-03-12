@@ -27,7 +27,7 @@ public with sharing class RestApiTask {
         if (obj instanceof Map<String, Object>) {
           System.debug(mobile);
           mob.Id__c = (String) mobile.get('id');
-          mob.Name = (String) mobile.get('name');
+          mob.Name__c = (String) mobile.get('name');
         }
         Object dataObject = mobile.get('data');
         if (dataObject instanceof Map<String, Object>) {

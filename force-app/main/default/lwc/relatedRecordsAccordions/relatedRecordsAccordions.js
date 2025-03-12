@@ -68,4 +68,3 @@ export default class RelatedRecordsAccordions extends LightningElement {
     //     // console.log('recordsData outside wire == ', JSON.stringify(this.recordsData))
     //     return this.isClicked?this.recordsData:[] ;
     // }
-    

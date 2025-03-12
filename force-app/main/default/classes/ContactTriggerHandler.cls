@@ -11,15 +11,15 @@ public class ContactTriggerHandler {
      }
 
      public void checkStatus(List<Contact> contactU,Map<Id,Contact> oldContactMap){
-    Set<Id> accId = new Set<Id>();
-        for(Contact con : contactU){
+         Set<Id> accId = new Set<Id>();
+         for(Contact con : contactU){
             // if (con.AccountId != null && oldContactMap.isEmpty()) {
             //     Contact oldCon = oldContactMap.get(con.Id);
                 
                 if (con.AccountId != null && oldContactMap.isEmpty() || oldContactMap.get(con.Id)!= null && con.Status__c != oldContactMap.get(con.Id).Status__c) {
                     accId.add(con.AccountId);
                 }
-        }
+                }
             // }
             
 
@@ -32,4 +32,3 @@ public class ContactTriggerHandler {
         }    
     }
 }
-

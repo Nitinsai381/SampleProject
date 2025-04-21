@@ -1,0 +1,33 @@
+<template>
+    <!-- <button onclick={handleClick}>
+        <lightning-icon 
+          icon-name="utility:notification" size="small"
+          alternative-text="Bell Notifications" 
+       
+          title="large size"
+          variant="inverse"
+        ></lightning-icon>
+    </button>
+    
+    <div lwc:if={isDisplay}>
+        <div class="new-notification">
+            <lightning-formatted-rich-text value={newNotification}></lightning-formatted-rich-text>
+        </div>
+    </div> -->
+
+    <lightning-button-menu 
+      alternative-text="Show menu"
+      icon-name="utility:notification"
+      icon-size="medium"
+      label=""
+      
+      variant="bare"
+    >
+      <lightning-menu-item value={newNotification} label={newNotification}>Hello</lightning-menu-item>
+      <!-- <lightning-menu-item value="menuItemTwo" label="Menu Item Two"></lightning-menu-item>
+      <lightning-menu-item value="menuItemThree" label="Menu Item Three"></lightning-menu-item> -->
+    </lightning-button-menu>
+    
+</template>
+
+<!-- onclick={clickHandler} -->

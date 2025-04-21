@@ -1,45 +1,22 @@
 <template>
-  <lightning-card>
+  <div>
     <lightning-layout>
-      <lightning-layout-item size="4"> </lightning-layout-item>
-      <lightning-layout-item size="4">
+      <!-- <lightning-layout-item size="4"> </lightning-layout-item> -->
+      <lightning-layout-item size="6">
         <!-- <label>Search names</label> -->
 
         <lightning-input
-          type="text"
+          type="search"
           name="contact"
-          placeholder="Search"
+          class="searchBar"
+          placeholder="search using name, email, phone"
           onchange={handleSearch}
-        ></lightning-input>
+          icon-name="utility:search"
+        >
+      <!-- <span>  <lightning-icon icon-name="utility:search" alternative-text="search" title="search"></lightning-icon></span>  -->
+      </lightning-input>
       </lightning-layout-item>
-      <lightning-layout-item size="4"> </lightning-layout-item>
+      <lightning-layout-item size="6"> </lightning-layout-item>
     </lightning-layout>
-    <!-- <button type="submit" onclick={handleSearch}>Search</button> -->
-
-    <!-- <template if:true={isSearched}>
-      <br />
-      <h2>
-        <b><center>Searched data</center></b>
-      </h2> -->
-    <!-- <br /> -->
-    <!-- <table
-        class="slds-table slds-table_bordered slds-table_cell-buffer slds-table_col-bordered"
-      >
-        <thead>
-          <template for:each={labelList} for:item="label">
-            <th key={label.Id}>{label.Label}</th>
-          </template>
-        </thead>
-        <tbody>
-          <template for:each={searchContacts} for:item="data">
-            <tr key={data.Id}>
-              <template for:each={data.record} for:item="value">
-                <td key={data.Id}>{value}</td>
-              </template>
-            </tr>
-          </template>
-        </tbody>
-      </table> -->
-    <!-- </template> -->
-  </lightning-card>
+  </div>
 </template>

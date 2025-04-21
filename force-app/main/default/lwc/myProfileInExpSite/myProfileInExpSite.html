@@ -1,0 +1,66 @@
+<template>
+    
+
+        <!-- <lightning-button-menu icon-name="utility:user" label="Profile">
+            <lightning-menu-item value="Settings" label="Settings" href="https://raagvitech76-dev-ed.develop.my.site.com/FirstTestSite"></lightning-menu-item>
+            <lightning-menu-item value="View Profile" label="View Profile" href="https://raagvitech76-dev-ed.develop.my.site.com/FirstTestSite/my-profile"></lightning-menu-item>
+      
+            <lightning-menu-item value="Logout" label="Logout" href={logoutLink}></lightning-menu-item>
+         
+        </lightning-button-menu> -->
+
+        <!-- <lightning-button-menu  alternative-text="Profile" variant="border-filled">
+            <lightning-formatted-rich-text slot="trigger" value={imgUrl} class="profileImage" alt="Profile" style="width: 24px; height: 24px; cursor: pointer;"></lightning-formatted-rich-text>
+      
+            <lightning-menu-item value="Settings" label="Settings" href="https://raagvitech76-dev-ed.develop.my.site.com/FirstTestSite"></lightning-menu-item>
+            <lightning-menu-item value="View Profile" label="View Profile" href="https://raagvitech76-dev-ed.develop.my.site.com/FirstTestSite/my-profile"></lightning-menu-item>
+            <lightning-menu-item value="Logout" label="Logout" href={logoutLink}></lightning-menu-item>
+        </lightning-button-menu> -->
+
+     
+            <lightning-button-menu id="profile-menu" icon-size="large" alternative-text="Profile" variant="border-filled">
+       
+                <!-- <div lwc:if={isImgUrl}>
+                    <img slot="trigger" src={imgUrl} alt="Profile" style="width: 24px; height: 24px; cursor: pointer;"/>
+                </div>
+                <div lwc:else>
+                    <lightning-icon slot="trigger" icon-name="standard:user" alternative-text="Profile" size="small" style="width: 24px; height: 24px;" ></lightning-icon>
+                </div> -->
+        
+                <lightning-menu-item value="Settings" label="Settings" href="https://raagvitech76-dev-ed.develop.my.site.com/FirstTestSite"></lightning-menu-item>
+                <lightning-menu-item value="View Profile" label="View Profile" href="https://raagvitech76-dev-ed.develop.my.site.com/FirstTestSite/my-profile"></lightning-menu-item>
+                <lightning-menu-item value="Logout" label="Logout" href={logoutLink}></lightning-menu-item>
+            </lightning-button-menu>
+     
+
+<!-- 
+        <div class="dropdown">
+            <button class="dropdown-button" onclick={toggleDropdown}>
+                <template if:true={isImgUrl}>
+                    <img src={imgUrl} alt="Profile" class="profile-icon"/>
+                </template>
+                <template if:false={isImgUrl}>
+                    <lightning-icon icon-name="standard:user" alternative-text="Profile" size="small" class="default-icon"></lightning-icon>
+                </template>
+            </button>
+            <div if:true={isDropdownOpen} class="dropdown-menu">
+                <div class="dropdown-item" onclick={navigateToSettings}>
+                    <lightning-icon icon-name="utility:settings" size="x-small"></lightning-icon>
+                    <span>Settings</span>
+                </div>
+                <div class="dropdown-item" >
+                    <lightning-icon icon-name="utility:user" size="x-small"></lightning-icon>
+                    <span>View Profile</span>
+                </div>
+                <div class="dropdown-item" onclick={logoutLink}>
+                    <lightning-icon icon-name="utility:logout" size="x-small"></lightning-icon>
+                    <span>Logout</span>
+                </div>
+            </div>
+        </div>
+    -->
+    
+
+
+</template>
+

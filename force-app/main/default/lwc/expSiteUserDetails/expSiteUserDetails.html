@@ -1,0 +1,25 @@
+<template>
+    <div class="slds-box external">
+
+        <div class="slds-box internal1">
+           <lightning-formatted-rich-text value={contactDetails.Upload_Image__c} class="profileImage" style="max-width: 75%;"></lightning-formatted-rich-text>  
+           <!-- <img src="{!'/servlet/servlet.ImageServer?id='+(Id from Rich text area)+'&amp oid='+(your organistaion Id)}"/> -->
+           <p>Account Name: {name}</p>
+
+            <p>Created on: {contactDetails.CreatedDate}</p>
+
+        </div>
+        <div class="internal2">
+            <div class="slds-box internal2A">
+                <p>Phone: {contactDetails.Phone}</p>
+                <p>Email: {contactDetails.Email}</p>
+
+            </div>
+            <div class="slds-box internal2B">
+                <p>Birthday: {contactDetails.Birthdate}</p>
+                <p>Languages: {contactDetails.Languages__c}</p>
+                <p>Department: {contactDetails.Department}</p>
+            </div>
+        </div>
+    </div>
+</template>

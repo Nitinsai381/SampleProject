@@ -1,0 +1,64 @@
+/* lightning-button-menu{
+    margin-left: 30%;
+} */
+/* button{
+    border: none;
+} */
+.button_icon-border-filled{
+    border-color: none;
+}
+.profile-menu{
+    background-color: black;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-button {
+    display: flex;
+    align-items: center;
+    background: rgb(215, 117, 6);
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.profile-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+
+.default-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: rgb(14, 14, 14);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 150px;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.dropdown-item lightning-icon {
+    margin-right: 8px;
+}
+
+.dropdown-item:hover {
+    background-color: #f4f4f4;
+}

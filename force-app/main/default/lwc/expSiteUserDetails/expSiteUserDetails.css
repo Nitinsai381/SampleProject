@@ -1,0 +1,56 @@
+.external {
+    color: rgb(8, 0, 0);
+    background-color: rgba(96, 96, 96, 0.237);
+    margin-left: 20%;
+    font-size: large;
+    font-weight: 600;
+    width: 60%;
+    height: 100%;
+    border-radius: 30px;
+    display: flex; 
+    justify-content: space-between; 
+    padding: 2%; 
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+}
+
+.internal1 {
+    width: 45%;
+    height: 98%; 
+    background-color: rgba(96, 96, 96, 0.237);
+    border-radius: 30px;
+}
+
+.internal2 {
+    width: 45%;
+    height: 98%; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between; 
+}
+
+h2 {
+    width: fit-content;
+}
+
+.internal2A, .internal2B {
+    width: 100%; 
+    height: 48%; 
+    background-color: rgba(96, 96, 96, 0.237);
+    border-radius: 30px;
+}
+.profileImage{
+    width: 4rem;
+    text-align: center;
+}
+.slds-rich-text-editor__output img{
+    width: 4rem;
+    text-align: center;
+}
+img{
+    max-width: 60% !important;
+    height: auto;
+}

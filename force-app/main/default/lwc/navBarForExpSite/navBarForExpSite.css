@@ -1,0 +1,15 @@
+div{
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  right: 5%;
+}
+.bell{
+    /* position: ; */
+    margin-right: 2rem;
+    margin-left: 2rem;
+  
+}
+.profile{
+    position: sticky;
+}

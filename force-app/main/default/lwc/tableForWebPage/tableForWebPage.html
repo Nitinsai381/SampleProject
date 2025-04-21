@@ -7,11 +7,23 @@
    -->
     <!-- <p>{ObjectValue} and {value}</p> -->
   <h1>Contacts</h1>
-    <template if:true={isEmpty}>
-        <template if:true={isSearch}>
-            <c-dynamic-search onsearchedobject={updateValues}></c-dynamic-search>
-          </template>
-      <lightning-card>
+    <div  lwc:if={isEmpty}>
+      <lightning-layout>
+<lightning-layout-item size="10">
+
+  <div lwc:if={isSearch}>
+      <c-dynamic-search onsearchedobject={updateValues}></c-dynamic-search>
+  </div>
+</lightning-layout-item>
+
+<lightning-layout-item size="2" class="newContact">
+  <a href="https://raagvitech76-dev-ed.develop.my.site.com/FirstTestSite/CreateContact" target="_self">
+    <button type="button" class="btn">New Contact</button>
+    <!-- <lightning-button label="New Contact" class="newConButton" variant="Primary" style="color: rgb(17, 19, 116);"></lightning-button> -->
+  </a>
+</lightning-layout-item>
+      </lightning-layout>
+      <div style="border:none">
         <!-- <br /> -->
         <!-- <div style="text-align: center">
           <h2>
@@ -43,16 +55,16 @@
             <button
               disabled={isPreviousDisable}
               onclick={onPrevious}
-              class="slds-button slds-button_brand"
+              class="btn slds-button slds-button_brand"
               style="margin-right: 2%"
             >
               Previous
             </button>
-            <span> {pageCount} of {totalPages} </span>
+            <span><p> {pageCount} of {totalPages} </p></span>
             <button
               disabled={isNextDisable}
               onclick={onNext}
-              class="slds-button slds-button_brand"
+              class="btn slds-button slds-button_brand"
               style="margin-left: 2%"
             >
               Next
@@ -65,12 +77,12 @@
             ></lightning-spinner>
           </div> -->
         </template>
-      </lightning-card>
-    </template>
+      </div>
+    </div>
   
-    <template if:false={isEmpty}>
+    <div lwc:elseif={isEmpty}>
       <lightning-card>
         <h4>No data available</h4>
       </lightning-card>
-    </template>
+    </div>
   </template>

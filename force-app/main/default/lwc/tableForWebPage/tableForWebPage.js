@@ -16,7 +16,7 @@ export default class TableForWebPage extends LightningElement {
     values=[];
     search = false;
     isSearch = true;
-    perSize = 5;
+    perSize = 10;
     start = 0;
     totalPages;
     pageCount = 1;

@@ -6,5 +6,12 @@
   },
   "salesforcedx-vscode-core.retrieve-test-code-coverage": true,
   "salesforce.einsteinForDevelopers.enableAutocompletions": false,
-  "xml.preferences.showSchemaDocumentationType": "none"
+  "xml.preferences.showSchemaDocumentationType": "none",
+  "salesforce.einsteinForDevelopers.enableAutocompletionsByFileType": {
+    "apex": false,
+    "javascript": true,
+    "css": true,
+    "html": true
+  },
+  "salesforce.einsteinForDevelopers.enable": false
 }

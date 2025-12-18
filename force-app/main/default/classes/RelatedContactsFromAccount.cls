@@ -15,9 +15,9 @@ public with sharing class RelatedContactsFromAccount {
           LastName = 'Related Contact ' + contactCount,
           AccountId = accsList.get(accountCount).Id
         );
-        System.debug('Each Contact: ' + con);
-        System.debug('Contacts Count: ' + contactCount);
-        System.debug('Account Count: ' + accountCount);
+        // System.debug('Each Contact: ' + con);
+        // System.debug('Contacts Count: ' + contactCount);
+        // System.debug('Account Count: ' + accountCount);
         consList.add(con);
         contactCount += 1;
       }

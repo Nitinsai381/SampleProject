@@ -17,10 +17,10 @@ public without sharing class ContactTriggerHandler{
         }
         for(Contact con : newContacts){
             if(accMap.containsKey(con.AccountId)){
-                con.BillingCity = accMap(con.AccountId).BillingCity;
-                con.BillingState = accMap(con.AccountId).BillingState;
-                con.BillingPostalCode = accMap(con.AccountId).BillingPostalCode;
-
+                con.BillingCity = accMap.get(con.AccountId).BillingCity;
+                con.BillingState = accMap.get(con.AccountId).BillingState;
+                con.BillingPostalCode = accMap.get(con.AccountId).BillingPostalCode;
+                con.BillingStreet = accMap.get(con.AccountId).BillingStreet;
             }
         }
     }

@@ -42,8 +42,6 @@ public without sharing AccountTriggerHandler{
             accMap.get(con.AccountId).BillingPostalCode = con.BillingPostalCode;
             accMap.get(con.AccountId).BillingState = con.BillingState;
             accMap.get(con.AccountId).BillingStreet = con.BillingStreet;
-
-
         }
     }
 }
